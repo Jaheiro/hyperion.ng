@@ -46,7 +46,9 @@ class ColorAdjustment;
 class SettingsManager;
 class BGEffectHandler;
 class CaptureCont;
+#if defined(ENABLE_BOBLIGHT)
 class BoblightServer;
+#endif
 class LedDeviceWrapper;
 class Logger;
 
@@ -476,8 +478,11 @@ private slots:
 	///
 	void handleNewVideoMode(VideoMode mode) { _currVideoMode = mode; }
 
-
-	void handlePriorityChangedLedDevice(const quint8& priority);
+	///
+	/// @brief Handle the scenario when no/an input source is available
+	///	@param priority   Current priority
+	///
+	void handleSourceAvailability(const quint8& priority);
 
 private:
 	friend class HyperionDaemon;
@@ -542,8 +547,10 @@ private:
 
 	VideoMode _currVideoMode = VideoMode::VIDEO_2D;
 
+#if defined(ENABLE_BOBLIGHT)
 	/// Boblight instance
 	BoblightServer* _boblightServer;
+#endif
 
 	bool _readOnlyMode;
 };

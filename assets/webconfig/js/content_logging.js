@@ -4,9 +4,10 @@ var isScroll = true;
 
 performTranslation();
 requestLoggingStop();
-requestLoggingStart();
 
 $(document).ready(function () {
+
+  requestLoggingStart();
 
   $('#conf_cont').append(createOptPanel('fa-reorder', $.i18n("edt_conf_log_heading_title"), 'editor_container', 'btn_submit'));
   if (window.showOptHelp) {
@@ -125,7 +126,7 @@ $(document).ready(function () {
         var function_ = messages[idx].function;
         var line = messages[idx].line;
         var file_name = messages[idx].fileName;
-        var msg = messages[idx].message;
+        var msg = encodeHTML(messages[idx].message);
         var level_string = messages[idx].levelString;
         var utime = messages[idx].utime;
 
